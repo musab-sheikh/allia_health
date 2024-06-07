@@ -100,7 +100,7 @@ class _SubmitReportScreenState extends State<SubmitReportScreen> {
                     getEmoji(selectedOption.option),
                     style: TextStyle(
                       fontSize: 64,
-                      color: Colors.black, // Ensure the color is explicitly set to black or appropriate
+                      color: Colors.black, 
                     ),
                   ),
                   RotatedBox(
