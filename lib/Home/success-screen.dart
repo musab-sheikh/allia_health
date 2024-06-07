@@ -12,8 +12,9 @@ class SuccessScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              
               Text(
-                'Submission Successful!',
+                'Self Report Completed',
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,

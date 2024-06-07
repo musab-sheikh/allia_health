@@ -4,6 +4,7 @@ import '../Service/self-report-service.dart';
 import '../Service/submit-report-service.dart';
 import 'success-screen.dart';
 
+
 class SubmitReportScreen extends StatefulWidget {
   final ApiService apiService;
   final Question question;
@@ -34,7 +35,7 @@ class _SubmitReportScreenState extends State<SubmitReportScreen> {
       print('AccessToken: ${widget.apiService.accessToken}');
       print('QuestionId: ${widget.question.id}');
       print('SelectedOptionId: ${selectedOption.id}');
-      
+
       await SubmitReportService.submitReport(
         accessToken: widget.apiService.accessToken!,
         questionId: int.parse(widget.question.id),
@@ -93,30 +94,53 @@ class _SubmitReportScreenState extends State<SubmitReportScreen> {
             ),
             SizedBox(height: 20.0),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Text(
-                    getEmoji(selectedOption.option),
-                    style: TextStyle(
-                      fontSize: 64,
-                      color: Colors.black, 
-                    ),
-                  ),
                   RotatedBox(
                     quarterTurns: 3,
-                    child: Slider(
-                      value: excitementLevel,
-                      min: 1,
-                      max: 10,
-                      divisions: 9,
-                      activeColor: Color(0xFF34C759),
-                      label: excitementLevel.round().toString(),
-                      onChanged: (value) {
-                        setState(() {
-                          excitementLevel = value;
-                        });
-                      },
+                    child: SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: Color(0xFF34C759),
+                        inactiveTrackColor: Colors.grey[300],
+                        trackHeight: 8.0,
+                        thumbShape: RoundSliderThumbShape(enabledThumbRadius: 20.0),
+                        overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                        thumbColor: Colors.transparent,
+                        overlayColor: Colors.transparent,
+                        activeTickMarkColor: Colors.transparent,
+                        inactiveTickMarkColor: Colors.transparent,
+                      ),
+                      child: Slider(
+                        value: excitementLevel,
+                        min: 1,
+                        max: 10,
+                        divisions: 9,
+                        onChanged: (value) {
+                          setState(() {
+                            excitementLevel = value;
+                          });
+                        },
+                        label: getEmoji(selectedOption.option),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 20,
+                    child: Container(
+                      height: 100,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            getEmoji(selectedOption.option),
+                            style: TextStyle(
+                              fontSize: 64,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                        ],
+                      ),
                     ),
                   ),
                 ],
